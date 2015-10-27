@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd
 
+    docker-php-ext-install memcached
+
 RUN apt-get install -y git
 
 # Install composer
@@ -17,8 +19,8 @@ RUN mv composer.phar /usr/bin/composer
 
 # Install php extension 
 # memcached
-RUN yes '' | pecl install -f memcached
-RUN echo "extension=memcached.so" >> /usr/local/etc/php/conf.d/memcached.ini
+RUN yes '' | pecl install -f memcache
+RUN echo "extension=memcache.so" >> /usr/local/etc/php/conf.d/memcache.ini
 
 COPY phpfpm-foreground /usr/local/bin/
 RUN chmod +x /usr/local/bin/phpfpm-foreground
