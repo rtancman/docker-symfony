@@ -27,5 +27,4 @@ WORKDIR /var/www/html
 
 EXPOSE 9000
 
-
 ENTRYPOINT ["/usr/local/bin/phpfpm-foreground"]
