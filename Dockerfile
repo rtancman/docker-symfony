@@ -38,6 +38,9 @@ RUN echo "extension=memcached.so" >> /usr/local/etc/php/conf.d/memcached.ini
 COPY phpfpm-foreground /usr/local/bin/
 RUN chmod +x /usr/local/bin/phpfpm-foreground
 
+RUN curl -LsS http://symfony.com/installer -o /usr/local/bin/symfony
+RUN chmod a+x /usr/local/bin/symfony
+
 WORKDIR /var/www/html
 
 EXPOSE 9000
