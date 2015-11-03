@@ -41,6 +41,15 @@ RUN chmod +x /usr/local/bin/phpfpm-foreground
 RUN curl -LsS http://symfony.com/installer -o /usr/local/bin/symfony
 RUN chmod a+x /usr/local/bin/symfony
 
+RUN apt-get update && apt-get install -y \
+        libxml2-dev
+
+RUN docker-php-ext-install soap
+
+# Xdebug
+RUN yes '' | pecl install -f xdebug
+RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini
+
 WORKDIR /var/www/html
 
 EXPOSE 9000
