@@ -45,13 +45,49 @@ RUN apt-get update && apt-get install -y \
         libxml2-dev
 
 RUN docker-php-ext-install soap
+RUN docker-php-ext-install shmop
+RUN docker-php-ext-install sockets
+RUN docker-php-ext-install sysvmsg
+RUN docker-php-ext-install sysvsem
+RUN docker-php-ext-install sysvshm
+RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install gettext
+RUN docker-php-ext-install exif
+RUN docker-php-ext-install dba
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install calendar
+RUN apt-get install -y libbz2-dev
+RUN docker-php-ext-install bz2
+RUN docker-php-ext-configure wddx
+RUN docker-php-ext-install wddx
+RUN docker-php-ext-install mysqli
+
+RUN yes '' | pecl install -f apcu
+RUN echo "extension=apcu.so" >> /usr/local/etc/php/conf.d/apcu.ini
 
 # Xdebug
 RUN yes '' | pecl install -f xdebug
-RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini
+RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so \n\
+xdebug.remote_enable=1 \n\
+xdebug.remote_handler=dbgp \n\
+xdebug.remote_autostart=0 \n\
+xdebug.remote_connect_back=0 \n\
+xdebug.remote_log=\"/var/log/xdebug.log\"" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+# zendopcache
+# RUN yes '' | pecl install -f zendopcache-7.0.2
+# RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/opcache.so \n\
+# opcache.memory_consumption=128  \n\
+# opcache.interned_strings_buffer=8  \n\
+# opcache.max_accelerated_files=4000  \n\
+# opcache.revalidate_freq=60  \n\
+# opcache.fast_shutdown=1  \n\
+# opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/opcache.ini
 
 WORKDIR /var/www/html
 
+EXPOSE 9004
 EXPOSE 9000
 
 ENTRYPOINT ["/usr/local/bin/phpfpm-foreground"]
