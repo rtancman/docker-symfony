@@ -85,6 +85,10 @@ xdebug.remote_log=\"/var/log/xdebug.log\"" >> /usr/local/etc/php/conf.d/xdebug.i
 # opcache.fast_shutdown=1  \n\
 # opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/opcache.ini
 
+RUN wget psysh.org/psysh
+RUN chmod +x psysh
+RUN mv ./psysh /usr/bin/psysh
+
 WORKDIR /var/www/html
 
 EXPOSE 9004
