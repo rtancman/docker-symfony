@@ -41,8 +41,7 @@ RUN chmod +x /usr/local/bin/phpfpm-foreground
 RUN curl -LsS http://symfony.com/installer -o /usr/local/bin/symfony
 RUN chmod a+x /usr/local/bin/symfony
 
-RUN apt-get update && apt-get install -y \
-        libxml2-dev
+RUN apt-get install -y libxml2-dev
 
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install shmop
@@ -75,8 +74,13 @@ xdebug.remote_autostart=0 \n\
 xdebug.remote_connect_back=0 \n\
 xdebug.remote_log=\"/var/log/xdebug.log\"" >> /usr/local/etc/php/conf.d/xdebug.ini
 
+# psysh console php
+RUN wget psysh.org/psysh
+RUN chmod +x psysh
+RUN mv ./psysh /usr/bin/psysh
+
 # zendopcache
-# RUN yes '' | pecl install -f zendopcache-7.0.2
+RUN yes '' | pecl install -f zendopcache-7.0.2
 # RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/opcache.so \n\
 # opcache.memory_consumption=128  \n\
 # opcache.interned_strings_buffer=8  \n\
@@ -85,9 +89,19 @@ xdebug.remote_log=\"/var/log/xdebug.log\"" >> /usr/local/etc/php/conf.d/xdebug.i
 # opcache.fast_shutdown=1  \n\
 # opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/opcache.ini
 
-RUN wget psysh.org/psysh
-RUN chmod +x psysh
-RUN mv ./psysh /usr/bin/psysh
+# APCu-4.0.10
+RUN yes '' | pecl install -f APCu-4.0.10
+
+# phpunit
+RUN wget https://phar.phpunit.de/phpunit-old.phar
+RUN chmod +x phpunit-old.phar
+RUN mv phpunit-old.phar /usr/local/bin/phpunit
+
+RUN echo ";;;;;;;;;;;;;;;;;;; ; Module Settings ; ;;;;;;;;;;;;;;;;;;; \n\
+[Date] \n\
+; Defines the default timezone used by the date functions \n\
+; http://www.php.net/manual/en/datetime.configuration.php#ini.date.timezone \n\
+date.timezone = America/Sao_Paulo \n" >> /usr/local/etc/php/conf.d/datetimezone.ini
 
 WORKDIR /var/www/html
 
