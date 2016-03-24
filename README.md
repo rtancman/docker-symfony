@@ -13,3 +13,10 @@ Docker image to run symfony using:
 - pdo
 - pdo_mysql
 - memcache/memcached
+
+# extras
+- psysh
+- phpunit
+- composer
+- symfony installer
+- git
