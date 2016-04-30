@@ -18,7 +18,10 @@
 - zip
 - pdo
 - pdo_mysql
+- pdo_pgsql
+- pdo_sqlite
 - memcache/memcached
+- opcache
 
 # extras
 - psysh
@@ -26,3 +29,5 @@
 - composer
 - symfony installer
 - git
+- mysql-client
+- pgsl-client

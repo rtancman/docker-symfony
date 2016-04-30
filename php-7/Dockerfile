@@ -1,4 +1,4 @@
-FROM php:5.6-fpm
+FROM php:7-fpm
 
 RUN apt-get update \
     && apt-get install -y \
@@ -75,7 +75,8 @@ RUN echo ";;;;;;;;;;;;;;;;;;; ; Module Settings ; ;;;;;;;;;;;;;;;;;;; \n\
 date.timezone = America/Sao_Paulo \n" >> /usr/local/etc/php/conf.d/datetimezone.ini
 
 # install php extension 
-RUN docker-php-ext-install iconv mcrypt mysql
+RUN docker-php-ext-install iconv
+RUN docker-php-ext-install mcrypt
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install zip

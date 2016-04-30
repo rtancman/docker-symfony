@@ -11,7 +11,11 @@ RUN apt-get update \
         libbz2-dev \
         build-essential \
         wget \
-        git
+        git \
+        gettext \
+        mysql-client libmysqlclient-dev \
+        postgresql-client libpq-dev \
+        sqlite3 libsqlite3-dev
 
 # composer
 RUN curl -sS https://getcomposer.org/installer | php
@@ -94,6 +98,10 @@ RUN docker-php-ext-install bz2
 RUN docker-php-ext-configure wddx
 RUN docker-php-ext-install wddx
 RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pgsql
+RUN docker-php-ext-install pdo_pgsql
+RUN docker-php-ext-install pdo_sqlite
+RUN docker-php-ext-install opcache
 
 WORKDIR /var/www/html
 
