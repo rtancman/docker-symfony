@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 
-exec hhvm -a
+exec hhvm -m server -d hhvm.server.type=fastcgi -d hhvm.server.port=9000

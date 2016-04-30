@@ -13,7 +13,8 @@ nginx:
 memcached:
   image:  memcached
 php:
-  image: rtancman/docker-symfony:php-7
+  image: symfonyhhvm
   volumes:
     - ./app:/var/www/html/dev
+    - ./server.ini:/etc/hhvm/server.ini
     - ./phpfpm-foreground:/usr/local/bin/phpfpm-foreground

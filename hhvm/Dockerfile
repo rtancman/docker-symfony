@@ -5,24 +5,39 @@ RUN echo deb http://dl.hhvm.com/debian jessie main | tee /etc/apt/sources.list.d
 
 RUN apt-get clean && \
     apt-get update && \
-    apt-get install -y hhvm \
-        libfreetype6-dev \
+    apt-get install -y libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
         libpng12-dev \
         libxml2-dev \
         libsasl2-dev \
         libbz2-dev \
-        build-essential \
+        libedit2 \
+        libsqlite3-0 \
+        libxml2 \
+        autoconf \
+        file \
+        g++ \
+        gcc \
+        libc-dev \
+        make \
+        pkg-config \
+        re2c \
+        curl \
         wget \
+        build-essential \
         git \
         gettext \
+        hhvm \
         mysql-client libmysqlclient-dev \
         postgresql-client libpq-dev \
         sqlite3 libsqlite3-dev
 
 COPY php.ini /etc/hhvm/php.ini
 RUN chmod +x /etc/hhvm/php.ini
+
+COPY server.ini /etc/hhvm/server.ini
+RUN chmod +x /etc/hhvm/server.ini
 
 # composer
 RUN curl -sS https://getcomposer.org/installer | php
