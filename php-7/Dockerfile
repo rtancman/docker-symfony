@@ -104,6 +104,8 @@ RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install opcache
 
+RUN rm -rf /var/lib/apt/lists/*
+
 WORKDIR /var/www/html
 
 EXPOSE 9004
