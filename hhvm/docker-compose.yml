@@ -13,7 +13,7 @@ nginx:
 memcached:
   image:  memcached
 php:
-  image: symfonyhhvm
+  image: rtancman/docker-symfony:hhvm
   volumes:
     - ./app:/var/www/html/dev
     - ./server.ini:/etc/hhvm/server.ini
