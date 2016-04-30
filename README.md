@@ -4,6 +4,7 @@
 # Dockerfile links
 - [docker-symfony:php-5.5](https://github.com/rtancman/docker-symfony/tree/master/php-5.5)
 - [docker-symfony:latest - php-5.6](https://github.com/rtancman/docker-symfony/tree/master/php-5.6)
+- [docker-symfony:php-7](https://github.com/rtancman/docker-symfony/tree/master/php-7)
 
 # Docker image to run symfony using
 - nginx

@@ -1,9 +1,4 @@
 #!/bin/bash
 set -e
-xdebug.remote_port=9004 \n\
-xdebug.remote_host=X.X.X.X \n\
-
-echo -e "xdebug.remote_port=9004 \n\
-xdebug.remote_host=X.X.X.X" >> /usr/local/etc/php/conf.d/xdebug.ini ;
 
 exec php-fpm
