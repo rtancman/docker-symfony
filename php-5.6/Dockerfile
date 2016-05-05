@@ -61,12 +61,12 @@ RUN yes '' | pecl install -f APCu-4.0.10
 
 # xdebug
 RUN yes '' | pecl install -f xdebug
-RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so \n\
-xdebug.remote_enable=1 \n\
-xdebug.remote_handler=dbgp \n\
-xdebug.remote_autostart=0 \n\
-xdebug.remote_connect_back=0 \n\
-xdebug.remote_log=\"/var/log/xdebug.log\"" >> /usr/local/etc/php/conf.d/xdebug.ini
+RUN echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_port=9004" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN echo ";;;;;;;;;;;;;;;;;;; ; Module Settings ; ;;;;;;;;;;;;;;;;;;; \n\
 [Date] \n\
