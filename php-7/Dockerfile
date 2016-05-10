@@ -61,12 +61,18 @@ RUN yes '' | pecl install -f APCu-4.0.10
 
 # xdebug
 RUN yes '' | pecl install -f xdebug
-RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so \n\
+RUN echo ";zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so \n\
 xdebug.remote_enable=1 \n\
 xdebug.remote_handler=dbgp \n\
 xdebug.remote_autostart=0 \n\
 xdebug.remote_connect_back=0 \n\
 xdebug.remote_log=\"/var/log/xdebug.log\"" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+# resolve impact xdebug in composer https://getcomposer.org/doc/articles/troubleshooting.md#xdebug-impact-on-composer 
+RUN echo "# Load xdebug Zend extension with php command" >> ~/.bashrc
+RUN echo "alias php='php -dzend_extension=xdebug.so'"  >> ~/.bashrc
+RUN echo "# PHPUnit needs xdebug for coverage. In this case, just make an alias with php command prefix."  >> ~/.bashrc
+RUN echo "alias phpunit='php $(which phpunit)'"  >> ~/.bashrc
 
 RUN echo ";;;;;;;;;;;;;;;;;;; ; Module Settings ; ;;;;;;;;;;;;;;;;;;; \n\
 [Date] \n\
@@ -103,6 +109,10 @@ RUN docker-php-ext-install pgsql
 RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install opcache
+
+# mongo
+RUN yes '' | pecl install -f mongo
+RUN echo "extension=mongo.so" >> /usr/local/etc/php/conf.d/mongo.ini
 
 # mongodb
 RUN yes '' | pecl install -f mongodb
