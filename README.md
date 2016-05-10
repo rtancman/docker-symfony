@@ -30,6 +30,7 @@
 - pdo_sqlite
 - memcache/memcached
 - opcache
+- mongodb
 
 # extras
 - psysh
@@ -38,4 +39,4 @@
 - symfony installer
 - git
 - mysql-client
-- pgsl-client
+- pgsql-client

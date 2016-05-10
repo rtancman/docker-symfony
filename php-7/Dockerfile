@@ -104,6 +104,10 @@ RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install opcache
 
+# mongodb
+RUN yes '' | pecl install -f mongodb
+RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
+
 RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/html
