@@ -6,6 +6,7 @@
 - [docker-symfony:php-5.5](https://github.com/rtancman/docker-symfony/tree/master/php-5.5)
 - [docker-symfony:latest - php-5.6](https://github.com/rtancman/docker-symfony/tree/master/php-5.6)
 - [docker-symfony:php-7](https://github.com/rtancman/docker-symfony/tree/master/php-7)
+- [docker-symfony:php-5.6-less - php-5.6 with nodejs and less](https://github.com/rtancman/docker-symfony/tree/master/php-5.6-less)
 
 # php versions to run symfony using
 - hhvm
@@ -17,6 +18,9 @@
 - nginx
 - memcached
 - phpfpm
+
+# images using nodejs and less
+- docker-symfony:php-5.6-less
 
 # php extensions
 - iconv 
