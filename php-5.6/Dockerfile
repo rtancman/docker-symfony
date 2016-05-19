@@ -15,7 +15,8 @@ RUN apt-get update \
         gettext \
         mysql-client libmysqlclient-dev \
         postgresql-client libpq-dev \
-        sqlite3 libsqlite3-dev
+        sqlite3 libsqlite3-dev \
+        ldap-utils 
 
 # composer
 RUN curl -sS https://getcomposer.org/installer | php
@@ -108,6 +109,9 @@ RUN docker-php-ext-install pgsql
 RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install opcache
+RUN apt-get install -y libldb-dev libldap2-dev
+RUN ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so
+RUN docker-php-ext-install ldap
 
 # mongo
 RUN yes '' | pecl install -f mongo
