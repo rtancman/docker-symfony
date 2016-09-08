@@ -62,7 +62,7 @@ RUN yes '' | pecl install -f APCu-4.0.10
 
 # xdebug
 RUN yes '' | pecl install -f xdebug
-RUN echo ";zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+RUN echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
@@ -70,8 +70,8 @@ RUN echo ";zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)
     && echo "xdebug.remote_port=9004" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # resolve impact xdebug in composer https://getcomposer.org/doc/articles/troubleshooting.md#xdebug-impact-on-composer 
-RUN echo "# Load xdebug Zend extension with php command" >> ~/.bashrc
-RUN echo "alias php='php -dzend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so'"  >> ~/.bashrc
+# RUN echo "# Load xdebug Zend extension with php command" >> ~/.bashrc
+# RUN echo "alias php='php -dzend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so'"  >> ~/.bashrc
 RUN echo "# PHPUnit needs xdebug for coverage. In this case, just make an alias with php command prefix."  >> ~/.bashrc
 RUN echo "alias phpunit='php $(which phpunit)'"  >> ~/.bashrc
 
